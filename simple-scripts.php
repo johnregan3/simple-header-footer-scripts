@@ -217,7 +217,28 @@ function ssjr3_render_submenu_page() {
 	<?php endif; ?>
 	<div class="wrap">
 		<?php screen_icon(); ?>
-		<h2><?php _e( 'Simple Scripts Plugin', 'ssjr3' ); ?></h2>
+        <h2><?php _e( 'Simple Scripts Plugin', 'ssjr3' ); ?></h2>
+
+        <!-- CodeMirror -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/codemirror.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/runmode/colorize.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/runmode/runmode.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/edit/matchbrackets.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/comment/continuecomment.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/addon/comment/comment.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/mode/javascript/javascript.js"></script>
+
+        <!-- to add your own plugin, specify it below and also specify in the options section below
+        <script src=""></script>
+        -->
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/theme/neo.css">
+        <!-- to add your own theme, specify it below and also specify in the options section below
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.2.0/theme/night.css">
+        -->
+
+
 		<p><?php _e('Add your own scripts (including Google Analytics) to your header or footer regardless of what theme you are using.', 'ssjr3') ?></p>
 		<p><a href="https://github.com/johnregan3/simple-scripts/wiki">Get Help at the Simple Scripts Plugin Wiki</a></p>
 		<form name="ssjr3-form" action="options.php" method="post" enctype="multipart/form-data">
@@ -227,6 +248,29 @@ function ssjr3_render_submenu_page() {
 				<input name="scripts-submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Update Scripts', 'ssjr3' ); ?>" />
 			</p>
 		</form>
+
 	</div>
+    <script>
+
+      // Add additional Code Mirror Options here
+
+      var codeMirrorOptions = {
+        mode: "text/javascript",
+        lineNumbers: true,
+        matchBrackets: true,
+        continueComments: "Enter",
+        theme: "neo",
+        extraKeys: {"Ctrl-Q": "toggleComment"}
+      }
+
+      var header_editor = CodeMirror.fromTextArea(
+        document.getElementById("header-scripts-input"),
+        codeMirrorOptions);
+      var footer_editor = CodeMirror.fromTextArea(
+        document.getElementById("footer-scripts-input"),
+        codeMirrorOptions);
+
+    </script>
+
 	<?php
 }
